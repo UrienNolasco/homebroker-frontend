@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "flowbite-react";
 import Image from "next/image";
+import AssetShow from "./components/AssetShow";
 
 export async function getMyWallet(walletId: string): Promise<Wallet> {
   const response = await fetch(`http://localhost:3000/wallets/${walletId}`);
@@ -44,20 +45,7 @@ export default async function MyWalletList({
                 (
                   <TableRow key={key}>
                     <TableCell>
-                      <div className="flex space-x-1">
-                        <div className="content-center">
-                          <Image
-                            src={walletAsset.asset.image_url}
-                            alt={walletAsset.asset.symbol}
-                            width={30}
-                            height={30}
-                          />
-                        </div>
-                        <div className="flex flex-col text-sm">
-                          <span>{walletAsset.asset.name}</span>
-                          <span>{walletAsset.asset.symbol}</span>
-                        </div>
-                      </div>
+                      <AssetShow asset={walletAsset.asset} />
                     </TableCell>
                     <TableCell>R$ {walletAsset.asset.price}</TableCell>
                     <TableCell>{walletAsset.shares}</TableCell>
