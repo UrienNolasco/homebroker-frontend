@@ -9,11 +9,11 @@ import {
   TableRow,
 } from "flowbite-react";
 import AssetShow from "../components/AssetShow";
+import ListAllWallets from "../components/ListAllWallets";
 
-export async function getAssets(): Promise<Asset[]> {
-  const response = await fetch(`http://localhost:3000/assets`);
-  return response.json();
-}
+import { getAssets, getMyWallet } from "../queires/queires";
+
+
 
 export default async function AssetsListPage({
   searchParams,
@@ -22,6 +22,17 @@ export default async function AssetsListPage({
 }) {
   const { wallet_id } = await searchParams;
   const assets = await getAssets();
+
+  if (!wallet_id) {
+    return <ListAllWallets />;
+  }
+
+  const wallet = await getMyWallet(wallet_id);
+
+  if (!wallet) {
+    return <ListAllWallets />;
+  }
+
   return (
     <div className="flex flex-col space-y-5">
       <article className="format">

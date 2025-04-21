@@ -5,7 +5,6 @@ import {
   Navbar as FlowbiteNavbar,
   NavbarToggle,
   NavbarCollapse,
-  NavbarLink,
 } from "flowbite-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,18 +33,25 @@ export default function Navbar() {
         <NavbarToggle />
       </div>
       <NavbarCollapse>
-        <Link href={`/?wallet_id=${wallet_id}`} passHref legacyBehavior>
-          <NavbarLink className="text-xl">Carteira</NavbarLink>
+        <Link
+          href={`/?wallet_id=${wallet_id}`}
+          className="block py-2 pl-3 pr-4 md:p-0 text-xl text-gray-700 hover:text-blue-700"
+        >
+          Carteira
         </Link>
 
-        <Link href={`/assets/?wallet_id=${wallet_id}`} passHref legacyBehavior>
-          <NavbarLink className="text-xl">Ativos</NavbarLink>
+        <Link
+          href={`/assets/?wallet_id=${wallet_id}`}
+          className="block py-2 pl-3 pr-4 md:p-0 text-xl text-gray-700 hover:text-blue-700"
+        >
+          Ativos
         </Link>
 
-        <Link href={`/orders?wallet_id=${wallet_id}`} passHref legacyBehavior>
-          <NavbarLink className="text-xl" href="#">
-            Ordens
-          </NavbarLink>
+        <Link
+          href={`/orders?wallet_id=${wallet_id}`}
+          className="block py-2 pl-3 pr-4 md:p-0 text-xl text-gray-700 hover:text-blue-700"
+        >
+          Ordens
         </Link>
       </NavbarCollapse>
     </FlowbiteNavbar>

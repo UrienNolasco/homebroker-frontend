@@ -1,14 +1,12 @@
 import AssetShow from "@/app/components/AssetShow";
 import { ChartComponent } from "@/app/components/ChartComponent";
+import ListAllWallets from "@/app/components/ListAllWallets";
 import OrderForm from "@/app/components/OrderForm";
 import { TabsItem } from "@/app/components/tabs";
+
+import { getAsset, getMyWallet } from "@/app/queires/queires";
 import { Asset, OrderType } from "@/models";
 import { Card, TabItem, Tabs } from "flowbite-react";
-
-export async function getAsset(symbol: string): Promise<Asset> {
-  const response = await fetch(`http://localhost:3000/assets/${symbol}`);
-  return response.json();
-}
 
 export default async function AssetDashBoard({
   params,
@@ -19,6 +17,16 @@ export default async function AssetDashBoard({
 }) {
   const { assetSymbol } = await params;
   const { wallet_id: walletId } = await searchParams;
+
+  if (!walletId) {
+    return <ListAllWallets />;
+  }
+
+  const wallet = await getMyWallet(walletId);
+
+  if (!wallet) {
+    return <ListAllWallets />;
+  }
 
   const asset = await getAsset(assetSymbol);
   return (
@@ -55,7 +63,7 @@ export default async function AssetDashBoard({
           </Card>
         </div>
         <div className="col-span-3 flex flex-grow">
-           {/* <ChartComponent header={'xpto'} ref={} /> */}
+          {/* <ChartComponent header={'xpto'} ref={} /> */}
         </div>
       </div>
     </div>

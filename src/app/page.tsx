@@ -8,15 +8,11 @@ import {
   TableHeadCell,
   TableRow,
 } from "flowbite-react";
-import Image from "next/image";
+
 import AssetShow from "./components/AssetShow";
 import ListAllWallets from "./components/ListAllWallets";
 import Link from "next/link";
-
-export async function getMyWallet(walletId: string): Promise<Wallet> {
-  const response = await fetch(`http://localhost:3000/wallets/${walletId}`);
-  return response.json();
-}
+import { getMyWallet } from "./queires/queires";
 
 export default async function MyWalletList({
   searchParams,
@@ -34,6 +30,7 @@ export default async function MyWalletList({
   if (!wallet) {
     return <ListAllWallets />;
   }
+
   return (
     <div className="flex flex-col space-y-5">
       <article className="format">
@@ -64,7 +61,7 @@ export default async function MyWalletList({
                       <Button
                         color="light"
                         as={Link}
-                        href={`/assets/${walletAsset.asset.symbol}`}
+                        href={`/assets/${walletAsset.asset.symbol}?wallet_id=${wallet_id}`}
                       >
                         Comprar/Vender
                       </Button>
