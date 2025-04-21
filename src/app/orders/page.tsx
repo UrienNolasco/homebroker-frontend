@@ -16,7 +16,6 @@ export async function getOrders(wallet_id: string): Promise<Order[]> {
   const response = await fetch(
     `http://localhost:3000/orders?walletId=${wallet_id}`
   );
-  console.log(response);
   return response.json();
 }
 

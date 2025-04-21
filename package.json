@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "flowbite-react": "^0.11.7",
+    "lightweight-charts": "^5.0.5",
     "next": "15.3.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
